@@ -32,18 +32,20 @@ const data = [
 ]
 
 class App extends Component  {
-  state = {
-  }
+  state = {}
 
   updateSelection = (event) => {
     this.setState({model: event.target.value})
   }
 
   handleClick = () => {
-    if(this.state.model ){
-      const computerData = data.filter(model => model.name === this.state.model)[0]
-    this.props.addComputer(computerData)
-    console.log('STATE MAPS', this.props.myModels)
+
+    if(this.state.model) {
+      const modelData = data.filter( model => 
+            model.name === this.state.model 
+            )[0]
+                              
+      this.props.addComputer(modelData)
     }
   }
 
@@ -52,19 +54,31 @@ class App extends Component  {
       <div className="App">
         {
           this.props.myModels.map((model, i) => {
-           return <ModelDetails key={i} name={model.name} manufacturer={model.manufacturer} year={model.year} origin={model.origin} />
+           return <ModelDetails key={i} 
+                                name={model.name} 
+                                manufacturer={model.manufacturer} 
+                                year={model.year} 
+                                origin={model.origin} 
+                              />
           })
         }
 
         <select value={this.state.model} onChange={ this.updateSelection}>
           <option value="">-- pick a model --</option>
+
           {
-            data.map( map => {
-              return <option key={map.name} value={map.name}> {map.name} ({map.year})</option>
-            })
+            data.map( map => <option 
+                                key={map.name} 
+                                value={map.name}
+                                > {map.name} ({map.year})
+                             </option>
+            )
           }
+
         </select>
+
         <button onClick={this.handleClick}>Add</button>
+        
       </div>
     );
   }

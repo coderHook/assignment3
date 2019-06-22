@@ -8,6 +8,7 @@ export default class modelDetails extends Component {
     year: PropTypes.number.isRequired,
     origin: PropTypes.string.isRequired,
   }
+  
   render() {
     return (
       <div>
