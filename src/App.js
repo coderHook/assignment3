@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react'
 import './App.css';
 
 const data = [
@@ -28,19 +28,34 @@ const data = [
   }
 ]
 
-function App() {
-  return (
-    <div className="App">
-      <select>
-        <option value="">-- pick a model --</option>
-        {
-          data.map( map => {
-            return <option value={map.name}>{map.name} ({map.year})</option>
-          })
-        }
-      </select>
-    </div>
-  );
+class App extends Component  {
+
+  state = {
+    value: ''
+  }
+
+  updateSelection = (event) => {
+    console.log('UpdateSelection', event.target.value)
+
+    this.setState({value: event.target.value})
+  }
+
+  render(){
+
+    console.log('this.state', this.state)
+    return (
+      <div className="App">
+        <select value={this.state.value} onChange={ this.updateSelection}>
+          <option value="">-- pick a model --</option>
+          {
+            data.map( map => {
+              return <option key={map.name} value={map.name}> {map.name} ({map.year})</option>
+            })
+          }
+        </select>
+      </div>
+    );
+  }
 }
 
 export default App;
