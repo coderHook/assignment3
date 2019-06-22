@@ -44,7 +44,7 @@ class App extends Component  {
 
     const computerData = data.filter(model => model.name === this.state.model)[0]
       
-    this.props.dispatch(addComputer(computerData))
+    this.props.addComputer(computerData)
   }
 
   render(){
@@ -66,4 +66,4 @@ class App extends Component  {
   }
 }
 
-export default connect()(App);
+export default connect(null, { addComputer })(App);
