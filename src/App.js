@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import './App.css';
+import { connect } from 'react-redux';
+import { addComputer } from './actions'
 
 const data = [
   {
@@ -29,15 +31,20 @@ const data = [
 ]
 
 class App extends Component  {
-
   state = {
-    value: ''
   }
 
   updateSelection = (event) => {
-    console.log('UpdateSelection', event.target.value)
 
-    this.setState({value: event.target.value})
+    this.setState({model: event.target.value})
+  }
+
+  handleClick = () => {
+    console.log('handleClick:', this.state)
+
+    const computerData = data.filter(model => model.name === this.state.model)[0]
+      
+    this.props.dispatch(addComputer(computerData))
   }
 
   render(){
@@ -45,7 +52,7 @@ class App extends Component  {
     console.log('this.state', this.state)
     return (
       <div className="App">
-        <select value={this.state.value} onChange={ this.updateSelection}>
+        <select value={this.state.model} onChange={ this.updateSelection}>
           <option value="">-- pick a model --</option>
           {
             data.map( map => {
@@ -53,9 +60,10 @@ class App extends Component  {
             })
           }
         </select>
+        <button onClick={this.handleClick}>Add</button>
       </div>
     );
   }
 }
 
-export default App;
+export default connect()(App);

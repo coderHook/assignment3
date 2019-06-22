@@ -1,3 +1,16 @@
+
+## About this project
+
+All the files are contained in the src folder, this are all together because of the size of the project.
+
+In bigger projects the structure that I will create will be slightly differnt adding the following folder to categorize the files:
+
+ - reducers/
+ - actions/
+ - components/
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
