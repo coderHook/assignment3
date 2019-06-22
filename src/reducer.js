@@ -3,7 +3,8 @@ import { ADD_MODEL } from './actions'
 const reducer = (state = [], action = {}) => {
   switch(action.type) {
     case ADD_MODEL:
-      return action.payload
+      return state.concat(action.payload)
+        
     default: 
       return state
   }
