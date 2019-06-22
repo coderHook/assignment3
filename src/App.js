@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css';
 import { connect } from 'react-redux';
 import { addComputer } from './actions'
+import ModelDetails from './components/ModelDetails'
 
 const data = [
   {
@@ -39,16 +40,22 @@ class App extends Component  {
   }
 
   handleClick = () => {
-    const computerData = data.filter(model => model.name === this.state.model)[0]
-    console.log('STATE MAPS', this.props.myModels)
+    if(this.state.model ){
+      const computerData = data.filter(model => model.name === this.state.model)[0]
     this.props.addComputer(computerData)
     console.log('STATE MAPS', this.props.myModels)
-
+    }
   }
 
   render(){
     return (
       <div className="App">
+        {
+          this.props.myModels.map((model, i) => {
+           return <ModelDetails key={i} name={model.name} manufacturer={model.manufacturer} year={model.year} origin={model.origin} />
+          })
+        }
+
         <select value={this.state.model} onChange={ this.updateSelection}>
           <option value="">-- pick a model --</option>
           {
