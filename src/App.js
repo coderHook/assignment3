@@ -35,21 +35,18 @@ class App extends Component  {
   }
 
   updateSelection = (event) => {
-
     this.setState({model: event.target.value})
   }
 
   handleClick = () => {
-    console.log('handleClick:', this.state)
-
     const computerData = data.filter(model => model.name === this.state.model)[0]
-      
+    console.log('STATE MAPS', this.props.myModels)
     this.props.addComputer(computerData)
+    console.log('STATE MAPS', this.props.myModels)
+
   }
 
   render(){
-
-    console.log('this.state', this.state)
     return (
       <div className="App">
         <select value={this.state.model} onChange={ this.updateSelection}>
@@ -66,4 +63,10 @@ class App extends Component  {
   }
 }
 
-export default connect(null, { addComputer })(App);
+export const mapStateToProps = (state) => {
+  return {
+    myModels: state
+  }
+}
+
+export default connect(mapStateToProps, { addComputer })(App);
